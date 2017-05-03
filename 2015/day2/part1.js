@@ -5,8 +5,8 @@ const INPUT = fs.readFileSync('./input.txt').toString().split('\n');
 
 // dim: 4x23x21 LxWxH
 // 2*l*w + 2*w*h + 2*h*l
-function presentWrap(string) {
-  let dimensions = string.split('x');
+function presentWrap(stringDimentions) {
+  let dimensions = stringDimentions.split('x');
   // [ '43', '3', '21' ]
 
   let length = dimensions[0];

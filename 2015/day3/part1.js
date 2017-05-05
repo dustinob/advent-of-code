@@ -9,37 +9,38 @@ const INPUT = fs.readFileSync('./input.txt').toString().split('');
 
 // console.log(INPUT);
 
-let testRoute = ['^', '>', '<', '^', '>', '>'];
-// {x: 0, y: 1}, {x: 1, y: 1}, {x: 0, y: 1}, {x: 0, y: 2}, {x: 1, y: 2}, {x: 2, y: 2}
+let testRoute = ['^', '>', '<', '^', '>', '>','<'];
+// [[0, 0], [ 1, 0 ], [ 1, 1 ], [ 1, 0 ], [ 2, 0 ], [ 2, 1 ], [ 2, 2 ] ]
 
-let receivedPresent = [];
-
+let receivedPresentList = [[0, 0]];
+let currentLocation = [0, 0]
 
 for (var i = 0; i < testRoute.length; i++) {
 
-  let currentLocation = {x: 0, y: 0}
+  currentLocation = [currentLocation[0], currentLocation[1]];
 
-  console.log('begin: ', currentLocation);
   if (testRoute[i] === '^') {
-    currentLocation.y += 1;
-    console.log('north: ', currentLocation);
+    currentLocation[0] += 1;
   }
   if (testRoute[i] === 'v') {
-    currentLocation.y += -1;
-    console.log('south: ', currentLocation);
+    currentLocation[0] += -1;
   }
   if (testRoute[i] === '>') {
-    currentLocation.x += 1;
-    console.log('east: ', currentLocation);
+    currentLocation[1] += 1;
   }
   if (testRoute[i] === '<') {
-    currentLocation.x += -1;
-    console.log('west: ', currentLocation);
+    currentLocation[1] += -1;
   }
-  console.log('end: ', currentLocation);
-
-  receivedPresent.push(currentLocation);
-
+  // console.log('end: ', currentLocation);
+  receivedPresentList.push(currentLocation);
 }
 
-console.log(receivedPresent);
+console.log('receivedPresentList: ', receivedPresentList);
+let uniquePresentList = [];
+
+uniquePresentList = receivedPresentList.filter(function(coordinate) {
+  return coordinate != uniquePresentList; 
+});
+
+
+console.log('uniquePresentList: ', uniquePresentList);

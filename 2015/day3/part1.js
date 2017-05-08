@@ -9,11 +9,12 @@ const INPUT = fs.readFileSync('./input.txt').toString().split('');
 
 // console.log(INPUT);
 
-let testRoute = ['^', '>', '<', '^', '>', '>','<'];
+let testRoute = INPUT // ['^', '>', '<', '^', '>', '>','<'];
 // [[0, 0], [ 1, 0 ], [ 1, 1 ], [ 1, 0 ], [ 2, 0 ], [ 2, 1 ], [ 2, 2 ] ]
 
 let receivedPresentList = [[0, 0]];
 let currentLocation = [0, 0]
+let uniquePresentList = [];
 
 for (var i = 0; i < testRoute.length; i++) {
 
@@ -36,11 +37,11 @@ for (var i = 0; i < testRoute.length; i++) {
 }
 
 console.log('receivedPresentList: ', receivedPresentList);
-let uniquePresentList = [];
 
-uniquePresentList = receivedPresentList.filter(function(coordinate) {
-  return coordinate != uniquePresentList; 
-});
-
+var counts = {};
+for (var i = 0; i < receivedPresentList.length; i++) {
+    counts[receivedPresentList[i]] = 1 + (counts[receivedPresentList[i]] || 0);
+}
+console.log('counts: ', Object.keys(counts).length);
 
 console.log('uniquePresentList: ', uniquePresentList);
